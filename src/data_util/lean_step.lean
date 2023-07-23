@@ -1,4 +1,6 @@
 import data_util.basic
+import data_util.sexp
+
 
 section LeanStep
 
@@ -20,8 +22,15 @@ meta structure LeanStepDatapoint : Type :=
 notation `to_tactic_json` := has_to_tactic_json.to_tactic_json
 
 /- TODO(): optionally use `with_verbose` -/
+-- meta instance : has_to_tactic_json expr :=
+-- ⟨λ e, (json.of_string ∘ format.to_string ∘ format.flatten) <$> tactic.pp e⟩
+
+-- sexpresion format
 meta instance : has_to_tactic_json expr :=
-⟨λ e, (json.of_string ∘ format.to_string ∘ format.flatten) <$> tactic.pp e⟩
+⟨λ e, (json.of_string ∘ format.to_string ∘ format.flatten) <$> TO_EXPR e⟩
+
+-- Using verbose raw_fmt:
+-- ⟨λ e, (json.of_string ∘ format.to_string ∘ format.flatten) <$> tactic.pp e.to_raw_fmt⟩
 
 meta instance has_to_tactic_json_of_has_coe_json {α} [has_coe α json] : has_to_tactic_json α :=
 ⟨λ x, pure ↑x⟩

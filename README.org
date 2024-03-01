@@ -1,5 +1,5 @@
 #+TITLE: Proof artifact co-training on Lean mathlib
-
+# (Deprecated, merged with BAIT project)
 * LeanStep proof term datasets
 This repository contains utilities for extracting various machine learning datasets from the proof terms of Lean's `mathlib`.
 
